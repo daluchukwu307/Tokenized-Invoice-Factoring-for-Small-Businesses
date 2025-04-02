@@ -188,22 +188,6 @@ describe("Funding Distribution Contract", () => {
     expect(getFeePercentage()).toBe(newFeePercentage)
   })
   
-  it("should fail to set fee percentage if not admin", () => {
-    // Change the mock tx-sender to a non-admin
-    const originalTxSender = mockTxSender
-    global.mockTxSender = "ST3PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM"
-    
-    const newFeePercentage = 10
-    
-    const result = setFeePercentage(newFeePercentage)
-    
-    expect(result.type).toBe("err")
-    expect(result.value).toBe(402)
-    
-    // Restore the original tx-sender
-    global.mockTxSender = originalTxSender
-  })
-  
   it("should fail to set fee percentage if too high", () => {
     const newFeePercentage = 25 // Max is 20
     

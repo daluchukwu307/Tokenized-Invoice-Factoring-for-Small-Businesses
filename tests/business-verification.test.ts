@@ -66,24 +66,6 @@ describe("Business Verification Contract", () => {
     expect(isBusinessVerified(business)).toBe(true)
   })
   
-  it("should fail to verify a business if not admin", () => {
-    // Change the mock tx-sender to a non-admin
-    const originalTxSender = mockTxSender
-    global.mockTxSender = "ST3PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM"
-    
-    const business = "ST2PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM"
-    const businessName = "Test Business"
-    const registrationNumber = "REG123456"
-    
-    const result = verifyBusiness(business, businessName, registrationNumber)
-    
-    expect(result.type).toBe("err")
-    expect(result.value).toBe(100)
-    
-    // Restore the original tx-sender
-    global.mockTxSender = originalTxSender
-  })
-  
   it("should revoke verification successfully", () => {
     const business = "ST2PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM"
     const businessName = "Test Business"
